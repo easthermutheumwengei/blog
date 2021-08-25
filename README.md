@@ -1,5 +1,5 @@
 # Blog
-An application that allow users to read blogs and for writers to post, edit and delete blogs:
+An application  read blogs and for writers to post, edit and delete blogs:
 https://estherblog.herokuapp.com/ 
 ## By Easther Mutheu
 
@@ -8,7 +8,7 @@ Blog is a web application that users can view other blog posts, comment on the b
 
 ## Specifications
 * Users can view most recent blog posts
-* Users can comment on blog posts
+* Users can comment on other writers' blog posts
 * Users can register and login to become writers
 * Writers can create new blog posts
 * Writers can edit and delete blog posts
