@@ -3,10 +3,14 @@
 {% block content %}
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
-        <div class="container p-2">
+        <form class="container p-2" method="post">
             <h4 class="text-center pt-2">Add a Blog Post</h4>
-            {{wtf.quick_form(form)}}
-        </div>
+
+            {{ wtf.form_field(form.title, class="form-control")}}
+            {{ wtf.form_field(form.description, class="form-control")}}
+            {{ wtf.form_field(form.submit, class="btn btn-primary", button_map={'submit': 'primary'}) }}
+
+        </form>
     </div>
 </div>
 

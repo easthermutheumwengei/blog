@@ -1,9 +1,10 @@
-from flask import render_template
-from flask_login import login_required
+from flask import render_template, request
+from flask_login import login_required, current_user
 from . import main
 import requests
-
 from .forms import BlogForm
+from .. import db
+from ..models import Blog
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -22,6 +23,16 @@ def all_blogs():
 @login_required
 def new_blog():
     form = BlogForm()
+    if form.validate_on_submit():
+        title = form.title
+        description = form.description
+        owner_id = current_user.id
+
+        blog = Blog(title=title, description=description, owner_id=owner_id)
+
+        db.session.add(blog)
+        db.session.commit()
+
     return render_template('new-blog.html', form=form)
 
 
