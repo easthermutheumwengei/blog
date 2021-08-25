@@ -34,6 +34,10 @@
             </form>
         </div>
         {% endif %}
+        {%else%}
+        <div class="container">
+            <p>Please <a style="text-decoration:none" href="/auth/login">Login</a> to comment</p>
+        </div>
         {% endif %}
 
         {% if comments %}
