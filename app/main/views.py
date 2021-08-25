@@ -54,12 +54,14 @@ def blog(id):
             db.session.add(comment)
             db.session.commit()
             return redirect(url_for('main.blog', id=blog.id))
+
         if 'comment_id' in request.form:
             comment_id = request.form['comment_id']
             comment = Comment.query.get(int(comment_id))
             db.session.delete(comment)
             db.session.commit()
             return redirect(url_for('main.blog', id=blog.id))
+
         if 'delete_blog' in request.form:
             db.session.delete(blog)
             db.session.commit()
