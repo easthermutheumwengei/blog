@@ -20,7 +20,6 @@ mail = Mail()
 
 
 def create_app(config_name):
-
     app = Flask(__name__)
     humanize = Humanize(app)
     db = SQLAlchemy(app)
@@ -35,7 +34,6 @@ def create_app(config_name):
         MAIL_PASSWORD='essy1234',
     ))
 
-
     simple.init_app(app)
     mail.init_app(app)
 
@@ -43,9 +41,6 @@ def create_app(config_name):
     # app.config.from_object(ProdConfig)
 
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-
-
-
 
     # Initializing flask extensions
     bootstrap.init_app(app)
@@ -61,4 +56,3 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app
-
