@@ -1,1 +1,29 @@
 {% extends 'base.html'%}
+
+{% block content %}
+<div class="conteiner">
+    <h4 class="text-center pt-2">All Blogs</h4>
+    <div class="container">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Posted On</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for blog in blogs%}
+    <tr>
+      <th scope="row">{{blog.id}}</th>
+      <td>{{blog.title}}</td>
+      <td>{{blog.description}}</td>
+      <td>{{blog.created_on}}</td>
+    </tr>
+  {%endfor%}
+  </tbody>
+</table>
+    </div>
+</div>
+{% endblock content %}

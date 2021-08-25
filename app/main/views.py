@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from . import main
 import requests
@@ -16,23 +16,26 @@ def index():
 
 @main.route('/blog/all/', methods=['GET', 'POST'])
 def all_blogs():
-    return render_template('all-blogs.html')
+    blogs = Blog.query.all()
+    return render_template('all-blogs.html', blogs=blogs)
 
 
 @main.route('/blog/new/', methods=['GET', 'POST'])
 @login_required
 def new_blog():
     form = BlogForm()
-    if form.validate_on_submit():
-        title = form.title
-        description = form.description
-        owner_id = current_user.id
+    if request.method == 'POST':
+        if 'description' in request.form and 'title' in request.form:
+            title = form.title.data
+            description = form.description.data
+            owner_id = current_user.id
+            blog = Blog(title=title, description=description, owner_id=owner_id)
 
-        blog = Blog(title=title, description=description, owner_id=owner_id)
-
-        db.session.add(blog)
-        db.session.commit()
-
+            db.session.add(blog)
+            db.session.commit()
+            return redirect(url_for('main.blog', id=blog.id))
+    else:
+        print(request.form)
     return render_template('new-blog.html', form=form)
 
 
