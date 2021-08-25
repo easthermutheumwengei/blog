@@ -6,7 +6,8 @@ from . import main
 import requests
 from .forms import BlogForm, CommentForm
 from .. import db
-from ..models import Blog, Comment
+from ..email import send_users_alert
+from ..models import Blog, Comment, Subscriptions
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -14,7 +15,11 @@ def index():
     quotes_response = requests.get('http://quotes.stormconsultancy.co.uk/random.json').json()
     print(quotes_response)
     if request.method == 'POST':
-        pass
+        email = request.form["email"]
+        new_subscription = Subscriptions(email=email)
+        db.session.add(new_subscription)
+        db.session.commit()
+        return redirect(url_for('main.index'))
     return render_template('index.html', quotes_response=quotes_response)
 
 
@@ -37,6 +42,7 @@ def new_blog():
 
             db.session.add(blog)
             db.session.commit()
+            send_users_alert(blog.id)
             return redirect(url_for('main.blog', id=blog.id))
     else:
         print(request.form)

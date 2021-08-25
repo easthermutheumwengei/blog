@@ -1,7 +1,8 @@
-from werkzeug.security import generate_password_hash,check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import UserMixin, current_user
 from . import login_manager
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -16,7 +17,6 @@ class User(UserMixin, db.Model):
     pass_secure = db.Column(db.String(255))
     blog = db.relationship('Blog', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
-
 
     @property
     def password(self):
@@ -72,7 +72,5 @@ class Subscriptions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False)
 
-
     def __repr__(self):
-        return f"Comment : id: {self.id} comment: {self.description}"
-
+        return f"Subscription : id: {self.email}"
