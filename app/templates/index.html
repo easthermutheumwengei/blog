@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <img src="/static/images/blog1.png" alt="index image"  class="img-responsive p-3 w-100" style="">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="text-center">
+                    <h4 class="font-weight-bold">Random Quote of the Day</h4>
+                    <blockquote class="blockquote">{{quotes_response.quote}}</blockquote>
+                    <p></p>
+                </div>
+            </div>
+
+        </div>
+
+</div>
+  </div>
+</div>
+
+{% endblock content%}
