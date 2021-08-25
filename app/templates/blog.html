@@ -3,10 +3,18 @@
 {% block content %}
 <div class="container">
     <h3 class="pt-5 pb-3 font-weight-bold">{{blog.title}}</h3>
-    <p class=""><i class="fas fa-user"></i> {{blog.owner_id|get_user_by_id}}</p>
-    <p class="text"><i class="fas fa-clock"></i> {{blog.created_on|humanize('naturaltime')}} </p>
-    <p><span class="text-primary"><i class="fas fa-pencil-alt"></i> Edit</span> <span class="text-danger float-right"><i
-            class="fas fa-trash"></i> Delete</span></p>
+    <p class="text-muted"><i class="fas fa-user"></i> {{blog.owner_id|get_user_by_id}}</p>
+    <p class="text-muted"><i class="fas fa-clock"></i> {{blog.created_on|humanize('naturaltime')}} </p>
+    <div class="d-flex justify-content-between">
+        <a href="/blog/edit/" style="text-decoration:none"><span class="text-primary"><i class="fas fa-pencil-alt"></i> Edit</span></a>
+        <form method="post">
+            <input type="hidden" value="{{blog.id}}" name="delete_blog">
+            <button type="submit" class="btn btn-default m-0 p-0"><span class="text-danger "><i
+                    class="fas fa-trash"></i> Delete</span></button>
+        </form>
+    </div>
+
+
     <hr>
     <p class="p-2">{{blog.description}}</p>
     <hr>
@@ -23,7 +31,9 @@
         </div>
 
         {% endif %}
-        {%if comments%}
+
+        {% if comments %}
+
         {%for comment in comments%}
         <div class="card mb-3">
             <div class="card-header border-0">
@@ -33,20 +43,18 @@
                     </div>
                     <div class="col-lg-2  col-md-3 col-sm-4 d-flex justify-content-between mb-0">
                         <span class="float-right  "><small><i
-                            class="fas fa-user"></i> {{comment.user_id | get_user_by_id}}</small></span>
+                                class="fas fa-user"></i> {{comment.user_id | get_user_by_id}}</small></span>
                         <form method="post">
                             <input type="hidden" name="comment_id" value="{{comment.id}}">
-                            <button type="submit" class="btn btn-default p-0 m-0"><i class="fas fa-trash text-danger"></i></button>
+                            <button type="submit" class="btn btn-default p-0 m-0"><i
+                                    class="fas fa-trash text-danger"></i></button>
                         </form>
                     </div>
-
-
-
                 </div>
-
             </div>
         </div>
         {%endfor%}
+
         {%else%}
         <p>There are no comments yet</p>
         {%endif%}
