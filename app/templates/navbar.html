@@ -1,17 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="/">Blog Run</a>
+  <a class="navbar-brand" href="/">Easther Blog Run</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto pr-5">
-      <li class="nav-item active">
-        <a class="nav-link" href="/blog/all/">All Blogs <span class="sr-only">(current)</span></a>
+      <li class="nav-item pr-5">
+        <a class="nav-link" href="/blog/all/" {% if 'blog/all' in request.path %} style="color:white!important" {% endif %}> <i class="fas fa-list"></i> All Blogs</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/blog/new/">New Blog</a>
+      <li class="nav-item  pr-5">
+        <a class="nav-link" href="/blog/new/"  {% if 'blog/new' in request.path %} style="color:white!important" {% endif %}> <i class="fas fa-plus"></i> New Blog</a>
       </li>
+      {%if current_user.is_authenticated%}
+      <li class="nav-item ">
+        <a class="nav-link" href="/auth/logout"> <i class="fas fa-sign-out-alt"></i> logout</a>
+      </li>
+      {%endif%}
     </ul>
   </div>
 </nav>

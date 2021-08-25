@@ -1,5 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+from sqlalchemy import desc
+
 from . import main
 import requests
 from .forms import BlogForm, CommentForm
@@ -16,7 +18,7 @@ def index():
 
 @main.route('/blog/all/', methods=['GET', 'POST'])
 def all_blogs():
-    blogs = Blog.query.all()
+    blogs = Blog.query.order_by(desc(Blog.created_on)).all()
     return render_template('all-blogs.html', blogs=blogs)
 
 
@@ -63,7 +65,7 @@ def blog(id):
     comment_form = CommentForm()
 
     comments = Comment.query.filter_by(blog_id=blog.id)
-
+    print(comments)
     if request.method == 'POST':
         if 'description' in request.form:
             description = comment_form.description.data
