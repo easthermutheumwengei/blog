@@ -11,6 +11,6 @@ def send_users_alert(id, **kwargs):
     sender_email = 'esthermutheu99@gmail.com'
     recipients = [subscription.email for subscription in Subscriptions.query.all()]
     email = Message(subject, sender=sender_email, recipients=recipients)
-    email.body = render_template("email/welcome_user.txt",blog_url=blog_url, **kwargs)
+    email.body = render_template("email/send_subscription_alert.txt",blog_url=blog_url, **kwargs)
     email.html = render_template("email/welcome_user.html", blog_url=blog_url, **kwargs)
     mail.send(email)
