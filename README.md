@@ -1,5 +1,5 @@
 # Blog
-A web application that allow users to read blogs and for writers to post, edit and delete blogs:
+An application that allow users to read blogs and for writers to post, edit and delete blogs:
 
 ## By Easther Mutheu
 
@@ -11,7 +11,7 @@ Blog is a web application that users can view other blog posts, comment on the b
 * Users can comment on blog posts
 * Users can register and login to become writers
 * Writers can create new blog posts
-* Writers can update and delete blog posts
+* Writers can edit and delete blog posts
 * Writers can delete comments
 
 ## Prerequisites
