@@ -26,8 +26,6 @@ MarkupSafe==1.1.0
 psycopg2==2.9.1
 python-dateutil==2.8.0
 python-editor==1.0.4
-heroku create <name-of-app>
-heroku create <name-of-app>
 vsix==1.12.0
 SQLAlchemy==1.2.17
 urllib3==1.26.6
