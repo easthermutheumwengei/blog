@@ -6,7 +6,7 @@
     <p class="text-muted"><i class="fas fa-user"></i> {{blog.owner_id|get_user_by_id}}</p>
     <p class="text-muted"><i class="fas fa-clock"></i> {{blog.created_on|humanize('naturaltime')}} </p>
     <div class="d-flex justify-content-between">
-        <a href="/blog/edit/" style="text-decoration:none"><span class="text-primary"><i class="fas fa-pencil-alt"></i> Edit</span></a>
+        <a href="/blog/edit/{{blog.id}}/" style="text-decoration:none"><span class="text-primary"><i class="fas fa-pencil-alt"></i> Edit</span></a>
         <form method="post">
             <input type="hidden" value="{{blog.id}}" name="delete_blog">
             <button type="submit" class="btn btn-default m-0 p-0"><span class="text-danger "><i

@@ -39,23 +39,22 @@ def new_blog():
     return render_template('new-blog.html', form=form)
 
 
-@main.route('/blog/edit/', methods=['GET', 'POST'])
+@main.route('/blog/edit/<int:id>/', methods=['GET', 'POST'])
 @login_required
-def edit_blog():
-    form = BlogForm()
+def edit_blog(id):
+    blog = Blog.query.get(id)
     if request.method == 'POST':
         if 'description' in request.form and 'title' in request.form:
-            title = form.title.data
-            description = form.description.data
-            owner_id = current_user.id
-            blog = Blog(title=title, description=description, owner_id=owner_id)
-
+            title = request.form['title']
+            description = request.form['description']
+            blog.title = title
+            blog.description=description
             db.session.add(blog)
             db.session.commit()
             return redirect(url_for('main.blog', id=blog.id))
     else:
         print(request.form)
-    return render_template('new-blog.html', form=form)
+    return render_template('edit-blog.html', blog=blog)
 
 
 @main.route('/blog/<int:id>/', methods=['GET', 'POST'])
