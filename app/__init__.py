@@ -1,5 +1,4 @@
 from flask import Flask
-# from config import config_options
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy

@@ -6,7 +6,7 @@ from .models import Subscriptions
 
 def send_users_alert(id, **kwargs):
     blog_id = str(id)
-    blog_url = 'https://estherblog.herokuapp.com/blog/'+blog_id+'/'
+    blog_url = 'https://eastherblog.herokuapp.com/blog/'+blog_id+'/'
     subject = 'New Blog Post Alert'
     sender_email = 'esthermutheu99@gmail.com'
     recipients = [subscription.email for subscription in Subscriptions.query.all()]
