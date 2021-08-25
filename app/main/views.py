@@ -3,6 +3,8 @@ from flask_login import login_required
 from . import main
 import requests
 
+from .forms import BlogForm
+
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -19,7 +21,8 @@ def all_blogs():
 @main.route('/blog/new/', methods=['GET', 'POST'])
 @login_required
 def new_blog():
-    return render_template('new-blog.html')
+    form = BlogForm()
+    return render_template('new-blog.html', form=form)
 
 
 @main.route('/blog/<int:id>/', methods=['GET', 'POST'])
