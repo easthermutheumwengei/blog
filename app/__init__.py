@@ -37,8 +37,8 @@ def create_app(config_name):
     simple.init_app(app)
     mail.init_app(app)
 
-    app.config.from_object(DevConfig)
-    # app.config.from_object(ProdConfig)
+    # app.config.from_object(DevConfig)
+    app.config.from_object(ProdConfig)
 
     app.config['TEMPLATES_AUTO_RELOAD'] = True
 
