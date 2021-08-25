@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="conteiner">
-    <h4 class="text-center pt-2">All Blogs</h4>
+    <h4 class="text-center pt-5 pb-5">All Blogs</h4>
     <div class="container">
         <table class="table">
   <thead>
@@ -10,16 +10,18 @@
       <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
-      <th scope="col">Posted On</th>
+      <th scope="col">Creation Date</th>
+      <th scope="col">View Blog</th>
     </tr>
   </thead>
   <tbody>
   {% for blog in blogs%}
-    <tr>
+    <tr onclick="window.location='/blog/8/';" style="cursor:pointer">
       <th scope="row">{{blog.id}}</th>
       <td>{{blog.title}}</td>
       <td>{{blog.description}}</td>
-      <td>{{blog.created_on}}</td>
+      <td>{{blog.created_on|humanize('naturaltime')}}</td>
+      <td><a href="/blog/{{blog.id}}" style="text-decoration:none"><i class="fas fa-eye"></i> Read </a></td>
     </tr>
   {%endfor%}
   </tbody>

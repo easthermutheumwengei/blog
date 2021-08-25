@@ -2,9 +2,9 @@ from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from . import main
 import requests
-from .forms import BlogForm
+from .forms import BlogForm, CommentForm
 from .. import db
-from ..models import Blog
+from ..models import Blog, Comment
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -41,5 +41,28 @@ def new_blog():
 
 @main.route('/blog/<int:id>/', methods=['GET', 'POST'])
 def blog(id):
-    return render_template('blog.html')
+    blog = Blog.query.get(id)
+    comment_form = CommentForm()
 
+    comments = Comment.query.filter_by(blog_id=blog.id)
+
+    if request.method == 'POST':
+        if 'description' in request.form:
+            description = comment_form.description.data
+            user_id = current_user.id
+            comment = Comment(description=description, user_id=user_id, blog_id=blog.id)
+            db.session.add(comment)
+            db.session.commit()
+            return redirect(url_for('main.blog', id=blog.id))
+        if 'comment_id' in request.form:
+            comment_id = request.form['comment_id']
+            comment = Comment.query.get(int(comment_id))
+            db.session.delete(comment)
+            db.session.commit()
+            return redirect(url_for('main.blog', id=blog.id))
+        if 'delete_blog' in request.form:
+            db.session.delete(blog)
+            db.session.commit()
+            return redirect(url_for('main.all_blogs'))
+
+    return render_template('blog.html', blog=blog, comment_form=comment_form, comments=comments)

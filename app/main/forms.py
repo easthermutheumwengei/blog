@@ -8,3 +8,8 @@ class BlogForm(FlaskForm):
     description = TextAreaField('Type in Your Blog Description', render_kw={'class': 'form-control', 'rows': 5},
                                 validators=[Required()])
     submit = SubmitField('Add a Blog Post', render_kw={'class': 'btn btn-primary'})
+
+
+class CommentForm(FlaskForm):
+    description = TextAreaField('Add comment', validators=[Required()])
+    submit = SubmitField(render_kw={'class': 'btn btn-success'})

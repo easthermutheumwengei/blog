@@ -33,7 +33,7 @@ def make_shell_context():
 
 
 @app.template_filter()
-def get_comment_user(user_id):
+def get_user_by_id(user_id):
     user = User.query.get(user_id)
     return user.username
 

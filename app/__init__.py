@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from flask_simplemde import SimpleMDE
 from flask_mail import Mail
 from config import DevConfig, ProdConfig
+from flask_humanize import Humanize
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -21,6 +22,7 @@ mail = Mail()
 def create_app(config_name):
 
     app = Flask(__name__)
+    humanize = Humanize(app)
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
 
