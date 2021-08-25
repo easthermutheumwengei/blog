@@ -66,3 +66,13 @@ class Comment(db.Model):
         return f"Comment : id: {self.id} comment: {self.description}"
 
 
+class Subscriptions(db.Model):
+    __tablename__ = 'subscriptions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, nullable=False)
+
+
+    def __repr__(self):
+        return f"Comment : id: {self.id} comment: {self.description}"
+

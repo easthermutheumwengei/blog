@@ -13,6 +13,8 @@ from ..models import Blog, Comment
 def index():
     quotes_response = requests.get('http://quotes.stormconsultancy.co.uk/random.json').json()
     print(quotes_response)
+    if request.method == 'POST':
+        pass
     return render_template('index.html', quotes_response=quotes_response)
 
 
